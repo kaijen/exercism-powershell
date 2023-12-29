@@ -16,21 +16,18 @@ Function Get-ColorCode() {
     Param(
         [string]$Color
     )
+
+    $Color = $Color.ToLower()
     
-    $color_codes = @{
-        black = 0;
-        brown = 1;
-        red = 2;
-        orange = 3;
-        yellow = 4;
-        green = 5;
-        blue = 6;
-        violet = 7;
-        grey = 8;
-        white = 9;
+    [array] $colors = Get-Colors
+
+    [bool] $color_defined = $colors.Contains($Color)
+
+    if ( -not $color_defined ) {
+        throw $Color + " is not defined!"
     }
 
-    return $color_codes[$Color]
+    return $colors.IndexOf($Color)
 }
 
 Function Get-Colors() {
@@ -45,18 +42,7 @@ Function Get-Colors() {
     Get-Colors
     #>
     
-    $color_codes = [ordered] @{
-        black = 0;
-        brown = 1;
-        red = 2;
-        orange = 3;
-        yellow = 4;
-        green = 5;
-        blue = 6;
-        violet = 7;
-        grey = 8;
-        white = 9;
-    }
-
-    return $color_codes.Keys
+    [array] $colors = "black",  "brown",  "red",  "orange",  "yellow",  "green",  "blue",  "violet",  "grey",  "white"
+        
+    return $colors
 }
