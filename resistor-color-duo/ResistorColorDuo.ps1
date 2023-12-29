@@ -1,3 +1,7 @@
+. ..\resistor-color\ResistorColor.ps1
+
+#endregion
+
 Function Get-ColorCodeValue() {
     <#
     .SYNOPSIS
@@ -17,7 +21,6 @@ Function Get-ColorCodeValue() {
         [string[]]$Colors
     )
 
+    return 10 * (Get-ColorCode($Colors[0])) + (Get-ColorCode($Colors[1]))
     
-    
-    throw "Please implement this function"
 }
