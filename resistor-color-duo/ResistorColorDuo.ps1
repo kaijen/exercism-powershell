@@ -18,12 +18,12 @@ Function Get-ColorCode() {
     )
 
     $Color = $Color.ToLower()
-    
+
     [array] $colors = Get-Colors
 
-    [bool] $color_defined = $colors.Contains($Color)
+    Write-Host $colors[$Color]
 
-    if ( -not $color_defined ) {
+    if ( $null -eq $colors[$Color] ) {
         throw $Color + " is not defined!"
     }
 

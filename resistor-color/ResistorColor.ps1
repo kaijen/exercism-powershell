@@ -17,13 +17,9 @@ Function Get-ColorCode() {
         [string]$Color
     )
 
-    $Color = $Color.ToLower()
-    
     [array] $colors = Get-Colors
 
-    [bool] $color_defined = $colors.Contains($Color)
-
-    if ( -not $color_defined ) {
+    if ( $null -eq $colors.IndexOf($Color) ) {
         throw $Color + " is not defined!"
     }
 
