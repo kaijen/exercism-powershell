@@ -13,7 +13,7 @@ Function Invoke-SecretHandshake() {
     00100 = close your eyes
     01000 = jump
     10000 = Reverse the order of the operations in the secret handshake.
-    
+
     .PARAMETER Number
     The value to be converted into a sequence of actions.
 
@@ -25,5 +25,19 @@ Function Invoke-SecretHandshake() {
     Param(
         [int]$Number
     )
-    Throw "Please implement this function"
+
+    $actions = @( "wink"; "double blink"; "close your eyes"; "jump" )
+    $code_actions = @()
+
+    0 .. 3 | Foreach-Object {
+        if ( $Number -band ( 1 -shl $_ ) ) {
+            $code_actions += $actions[$_]
+        }
+    }
+
+    if ( $Number -band ( 1 -shl 4 )) {
+        [array]::Reverse( $code_actions)
+    }
+
+    return $code_actions
 }
