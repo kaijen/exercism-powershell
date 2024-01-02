@@ -9,14 +9,14 @@ Function Get-SumOfMultiples {
     we get 3, 5, 6, 9, 10, 12, 15, and 18.
 
     .PARAMETER Multiples
-    An array of the factors 
+    An array of the factors
 
     .PARAMETER Limit
     The value BELOW which we test for
 
     .EXAMPLE
     Get-SumOfMultiples -Multiples @(3, 5) -Limit 10
-    
+
     Returns 23
     #>
     [CmdletBinding()]
@@ -25,5 +25,19 @@ Function Get-SumOfMultiples {
         [int]$Limit
     )
 
-    Throw "Please implement this function"
+    $array = [System.Collections.Generic.HashSet[int]]@()
+
+    foreach ( $m in $Multiples ) {
+        $factor = 1
+        while( ( $m * $factor ) -lt $Limit) {
+            [void]$array.Add(($m * $factor++))
+        }
+    }
+
+    $ret = 0
+    foreach ($e in $array) {
+        $ret += $e
+    }
+
+    return $ret
 }
