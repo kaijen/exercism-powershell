@@ -17,13 +17,9 @@ Function Get-ColorCode() {
         [string]$Color
     )
 
-    $Color = $Color.ToLower()
-
     [array] $colors = Get-Colors
 
-    Write-Host $colors[$Color]
-
-    if ( $null -eq $colors[$Color] ) {
+    if ( $null -eq $colors.IndexOf($Color) ) {
         throw $Color + " is not defined!"
     }
 
@@ -41,10 +37,8 @@ Function Get-Colors() {
     .EXAMPLE
     Get-Colors
     #>
-    
-    [array] $colors = "black",  "brown",  "red",  "orange",  "yellow",  "green",  "blue",  "violet",  "grey",  "white"
-        
-    return $colors
+
+    return @("black",  "brown",  "red",  "orange",  "yellow",  "green",  "blue",  "violet",  "grey",  "white")
 }
 
 Function Get-ColorCodeValue() {

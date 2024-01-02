@@ -37,8 +37,6 @@ Function Get-Colors() {
     .EXAMPLE
     Get-Colors
     #>
-    
-    [array] $colors = "black",  "brown",  "red",  "orange",  "yellow",  "green",  "blue",  "violet",  "grey",  "white"
-        
-    return $colors
+
+    return @("black",  "brown",  "red",  "orange",  "yellow",  "green",  "blue",  "violet",  "grey",  "white")
 }
