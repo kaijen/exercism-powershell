@@ -17,5 +17,18 @@ Function Invoke-FlattenArray() {
     Param(
         [System.Object[]]$Array
     )
-    Throw "Please implement this function"
+
+    $ret = @()
+    foreach ($a in $Array) {
+        if ($nul -eq $a) {
+            continue
+        }
+        if ($a -is [array]) {
+            $ret += (Invoke-FlattenArray -Array $a)
+        }
+        else {
+            $ret += $a
+        }
+    }
+    return $ret
 }
