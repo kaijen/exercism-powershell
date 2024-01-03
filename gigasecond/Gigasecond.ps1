@@ -17,7 +17,7 @@ Function Add-Gigasecond() {
         [DateTime]$Time
     )
 
-    $gigaseconds = 1000000000
+    $gigaseconds = 1e9
 
     return $Time.AddSeconds($gigaseconds)
 }

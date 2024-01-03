@@ -62,18 +62,19 @@ Function Get-ResistorLabel() {
     Param(
         [string[]]$Colors
     )
-    $resistance_base = ( 10 * (Get-ColorCode($Colors[0])) + (Get-ColorCode($Colors[1])) )
-    $exponent = Get-ColorCode($Colors[2])
-    $prefixes = @("", "kilo", "mega", "giga")
-    $display_resistance = $resistance_base * [Math]::Pow(10, $exponent)
 
-    $prefix_index = 0
-    while ( $display_resistance -ge 1000 ) {
-        $prefix_index++
-        $display_resistance /= 1000
+    $units = [ordered]@{
+        1e9 = "gigaohms"
+        1e6 = "megaohms"
+        1e3 = "kiloohms"
     }
 
-    $prefix = $prefixes[$prefix_index]
+    $resistance = ( ( 10 * (Get-ColorCode($Colors[0])) + (Get-ColorCode($Colors[1])) ) ) * [Math]::Pow(10, (Get-ColorCode($Colors[2])))
 
-    return "{0} {1}ohms" -f $display_resistance, $prefix
+    foreach ($key in $units.Keys) {
+        if ($resistance -gt $key) {
+            return "$($resistance / $key) $($units[$key])"
+        }
+    }
+    "$resistance ohms"
 }
