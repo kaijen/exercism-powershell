@@ -1,3 +1,4 @@
+[cultureinfo]::currentculture = 'en-US'
 Function Invoke-Darts() {
     <#
     .SYNOPSIS
@@ -22,6 +23,16 @@ Function Invoke-Darts() {
         [Double]$X,
         [Double]$Y
     )
-    
-    Throw "Please implement this function"
+
+    $scores = [ordered]@{ 1.0 = 10; 5.0 = 5; 10.0 = 1}
+
+    $radius = [Math]::Sqrt( $X*$X + $Y*$Y )
+
+    foreach ( $r in $scores.Keys ) {
+        if ( $radius -le $r ) {
+            return $scores[$r]
+        }
+    }
+
+    return 0
 }
