@@ -11,7 +11,7 @@ Function Get-ReverseString {
 
     .EXAMPLE
     Get-ReverseString "PowerShell"
-    
+
     This will return llehSrewoP
 
     .EXAMPLE
@@ -24,6 +24,13 @@ Function Get-ReverseString {
         [Parameter(Position=1, ValueFromPipeline=$true)]
         [string]$Forward
 	)
-	
-	Throw "Please implement this function"
+
+    # $ra = $Forward.ToCharArray()
+    # $ra = $Forward -split ""
+    # [array]::Reverse($ra)
+    # return -join ($ra)
+
+    # Stole this from https://exercism.org/tracks/powershell/exercises/reverse-string/solutions/rabestro
+    # Found it much better than my approach
+    return $Forward[-1..-$Forward.Length]
 }
