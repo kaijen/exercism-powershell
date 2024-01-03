@@ -25,7 +25,9 @@ Function Invoke-Panagram() {
     }
 
     $Sentence.ToLower().ToCharArray() | ForEach-Object {
-        $alphabet[$_]++
+        if ( $null -ne $alphabet[$_] ) {
+            $alphabet[$_]++
+        }
     }
 
     return ( $alphabet.Values | Measure-Object -Minimum).Minimum -gt 0
