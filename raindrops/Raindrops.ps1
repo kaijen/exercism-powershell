@@ -2,7 +2,7 @@ Function Get-Raindrops() {
     <#
     .SYNOPSIS
     Given a number convert it to Pling, Plang, Plong if it has factors of 3, 5 or 7.
-    
+
     .DESCRIPTION
     Convert a number to a string, the contents of which depend on the number's factors.
 
@@ -10,10 +10,10 @@ Function Get-Raindrops() {
     - If the number has 5 as a factor, output 'Plang'.
     - If the number has 7 as a factor, output 'Plong'.
     - If the number does not have 3, 5, or 7 as a factor, just pass the number's digits straight through.
-    
+
     .PARAMETER Rain
     The number to evaluate
-    
+
     .EXAMPLE
     Get-Raindrops -Rain 35
 
@@ -29,5 +29,16 @@ Function Get-Raindrops() {
         [int]$Rain
     )
 
-    Throw "Please implement this function"
+    $sounds = @{ 3 = "Pling"; 5 = "Plang"; 7 = "Plong" }
+    $sound = ""
+    @( 3, 5, 7) | Foreach-Object {
+        if ( ( $Rain % $_ ) -eq 0 ) {
+            $sound += $sounds[$_]
+        }
+    }
+    if ( $sound -eq "" ) {
+        $sound = $Rain
+    }
+
+    return $sound
 }
