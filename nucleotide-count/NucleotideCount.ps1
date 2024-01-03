@@ -2,7 +2,7 @@ Function Get-NucleotideCount() {
     <#
     .SYNOPSIS
     Given a single stranded DNA string, compute how many times each nucleotide occurs in the string.
-    
+
     .DESCRIPTION
     The genetic language of every living thing on the planet is DNA.
     DNA is a large molecule that is built from an extremely long sequence of individual elements called nucleotides.
@@ -12,13 +12,13 @@ Function Get-NucleotideCount() {
     And returns a hashtable in the format:
 
     @{ A = 2; C = 2; G = 2; T = 3 }
-    
+
     .PARAMETER Strand
     The DNA strand to count
-    
+
     .EXAMPLE
     Get-NucleotideCount -Strand "ACGTAGCTT"
-    
+
     Returns: @{ A = 2; C = 2; G = 2; T = 3 }
     #>
     [CmdletBinding()]
@@ -26,5 +26,19 @@ Function Get-NucleotideCount() {
         [string]$Strand
     )
 
-    Throw "Please implement this function"
+    $Strand = $Strand.ToUpper()
+    $Nucleotides = @( 'A', 'C', 'G', 'T')
+    $counts = @{}
+    $Nucleotides | ForEach-Object {
+        $counts[$_] = 0
+    }
+
+    $Strand.ToCharArray() | ForEach-Object {
+        if ( -not ( $Nucleotides.Contains($_.ToString()) ) ) {
+            Throw "Invalid nucleotide in strand"
+        }
+        $counts[$_.ToString()]++
+    }
+
+    return $counts
 }
