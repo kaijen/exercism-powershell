@@ -34,10 +34,5 @@ Function Get-SumOfMultiples {
         }
     }
 
-    $ret = 0
-    foreach ($e in $array) {
-        $ret += $e
-    }
-
-    return $ret
+    return ( $array | Measure-Object -Sum ).Sum
 }
