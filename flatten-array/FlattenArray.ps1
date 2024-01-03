@@ -18,17 +18,12 @@ Function Invoke-FlattenArray() {
         [System.Object[]]$Array
     )
 
-    $ret = @()
     foreach ($a in $Array) {
-        if ($nul -eq $a) {
-            continue
-        }
         if ($a -is [array]) {
-            $ret += (Invoke-FlattenArray -Array $a)
+            Invoke-FlattenArray -Array $a
         }
-        else {
-            $ret += $a
+        elseif ( $null -ne $a ) {
+            $a
         }
     }
-    return $ret
 }
