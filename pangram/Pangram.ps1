@@ -19,17 +19,5 @@ Function Invoke-Panagram() {
         [string]$Sentence
     )
 
-    $alphabet = [ordered]@{}
-    [char]'a'..[char]'z' | Foreach-Object  {
-        $alphabet[$_] = 0
-    }
-
-    $Sentence.ToLower().ToCharArray() | ForEach-Object {
-        if ( $null -ne $alphabet[$_] ) {
-            $alphabet[$_]++
-        }
-    }
-
-    return ( $alphabet.Values | Measure-Object -Minimum).Minimum -gt 0
-
+    return (( $Sentence.ToLower() -replace "[^A-Za-z]", "").ToCharArray() | Sort-Object | Get-Unique).Length -eq 26
 }
