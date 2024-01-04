@@ -16,6 +16,13 @@ Function Invoke-RnaTranscription() {
     Param(
         [string]$Strand
     )
-    
-    throw "Please implement this function"
+
+    $transcription = @{ G="C"; C="G"; T="A"; A="U" }
+
+    if ( ( $Strand.ToUpper() -Replace "[GCTA]","" ).Length -ne 0 ) {
+        Throw "Not a vald strand"
+    }
+
+    return ( $Strand.ToUpper() -Split "" | ForEach-Object { $_ -Replace $_, $transcription[$_] } ) -join ""
+
 }
