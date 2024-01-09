@@ -26,19 +26,14 @@ Function Get-NucleotideCount() {
         [string]$Strand
     )
 
-    $Strand = $Strand.ToUpper()
-    $Nucleotides = @( 'A', 'C', 'G', 'T')
-    $counts = @{}
-    $Nucleotides | ForEach-Object {
-        $counts[$_] = 0
-    }
-
-    $Strand.ToCharArray() | ForEach-Object {
-        if ( -not ( $Nucleotides.Contains($_.ToString()) ) ) {
-            Throw "Invalid nucleotide in strand"
+    # Code based on mentoring comments
+    "ACGT".ToCharArray() | ForEach-Object { $counts = @{} } { $counts["$_"] = 0 }
+     $Strand.ToUpper().ToCharArray() | ForEach-Object {
+        if ( ! $counts.ContainsKey("$_")) {
+            Write-Error "Invalid nucleotide in strand" -ErrorAction Stop
         }
-        $counts[$_.ToString()]++
+        $counts["$_"] += 1
     }
-
     return $counts
+
 }
