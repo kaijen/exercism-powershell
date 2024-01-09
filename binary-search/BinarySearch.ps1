@@ -21,5 +21,22 @@ Function Invoke-BinarySearch() {
         [Int64]$Value
     )
 
-    throw "Please implement this function"
+    $left = 0
+    $right = $array.Length - 1
+
+    while ($left -le $right) {
+        $mid = [Math]::Floor(($left + $right) / 2)
+
+        if ($array[$mid] -eq $Value) {
+            return $mid
+        }
+        elseif ($array[$mid] -lt $Value) {
+            $left = $mid + 1
+        }
+        else {
+            $right = $mid - 1
+        }
+    }
+
+    Throw "error: value not in array"
 }
