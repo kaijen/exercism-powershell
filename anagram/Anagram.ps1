@@ -1,3 +1,12 @@
+function Invoke-c14n {
+    [CmdletBinding()]
+    param (
+        [String]$Subject
+    )
+
+    return ( $Subject.ToLower() -split "" | Sort-Object ) -join ""
+}
+
 Function Invoke-Anagram() {
     <#
     .SYNOPSIS
@@ -22,5 +31,6 @@ Function Invoke-Anagram() {
         [string[]]$Candidates
     )
 
-    Throw "Please implement this function"
+    $Candidates | Where-Object { ( $_ -ne $Subject ) -and ( ( Invoke-c14n -Subject $_ ) -ceq ( Invoke-c14n -Subject $Subject ) ) }
+
 }
