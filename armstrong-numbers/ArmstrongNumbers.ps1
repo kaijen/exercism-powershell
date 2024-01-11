@@ -17,14 +17,9 @@ Function Invoke-ArmstrongNumbers() {
         [Int64]$Number
     )
 
-    # Experiment with Github Copilot after some discussion how to convert a number to an array of digits.
-    $digits = ( $Number.ToString().ToCharArray() | ForEach-Object { [int]([char]$_) - [int]([char]'0') } )
-    $n = $digits.Length
-    $sum = 0
-
-    foreach ($digit in $digits) {
-        $sum += [Math]::Pow([int]$digit, $n)
-    }
+    $Digits = $Number -split "" -ne ""
+    $Len = $Digits.Count
+    $sum = ($Digits | ForEach-Object { [Math]::Pow($_, $Len) } | Measure-Object -Sum).Sum
 
     return $sum -eq $Number
 }
