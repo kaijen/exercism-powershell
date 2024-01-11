@@ -39,5 +39,5 @@ Function Get-Triangle() {
         }
     }
 
-    return [Triangle]([double[]]($Sides | Get-Unique).Count)
+    return [Triangle]([double[]]($Sides | Sort-Object -Unique).Count)
 }
