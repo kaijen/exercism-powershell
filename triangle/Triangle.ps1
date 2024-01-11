@@ -1,6 +1,6 @@
 Enum Triangle {
-    isosceles = 1
-    equilateral
+    equilateral = 1
+    isosceles
     scalene
 }
 
@@ -39,5 +39,5 @@ Function Get-Triangle() {
         }
     }
 
-    return [Triangle](($lengths.Values | Measure-Object Count).Count)
+    return [Triangle]([double[]]($Sides | Get-Unique).Count)
 }
