@@ -14,6 +14,7 @@ Function Invoke-ArmstrongNumbers() {
     #>
     [CmdletBinding()]
     Param(
+        [ValidatePattern('^[0-9]+$')]
         [Int64]$Number
     )
 
