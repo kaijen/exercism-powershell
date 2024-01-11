@@ -17,7 +17,14 @@ Function Invoke-ArmstrongNumbers() {
         [Int64]$Number
     )
 
-    $Digits = $Number -split "" -ne ""
+    $base = 10
+    $Digits = @()
+    $remainder = $Number
+    while ( $remainder -gt 0 ) {
+        $Digits += $remainder % $base
+        $remainder = [int][Math]::Floor( $remainder / $base )
+    }
+
     $Len = $Digits.Count
     $sum = ($Digits | ForEach-Object { [Math]::Pow($_, $Len) } | Measure-Object -Sum).Sum
 
