@@ -1,7 +1,7 @@
 Enum Triangle {
-    scalene = 1
-    isosceles
+    isosceles = 1
     equilateral
+    scalene
 }
 
 Function Get-Triangle() {
@@ -33,13 +33,11 @@ Function Get-Triangle() {
         Throw "All side lengths must be positive."
     }
 
-    $lengths = @{}
     for ($i = 0; $i -lt 3; $i++) {
         if ($sides[$i] -gt ($sides[($i + 1) % 3] + $sides[($i + 2) % 3])) {
             Throw "Side lengths violate triangle inequality."
         }
-        $lengths[$sides[$i]]++
     }
 
-    return [Triangle](($lengths.Values | Measure-Object -Maximum).Maximum)
+    return [Triangle](($lengths.Values | Measure-Object Count).Count)
 }
