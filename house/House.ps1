@@ -1,16 +1,16 @@
 $poem_blocks = @(
-    "the house that Jack built",
-    "the malt that lay in",
-    "the rat that ate",
-    "the cat that killed",
-    "the dog that worried",
-    "the cow with the crumpled horn that tossed",
-    "the maiden all forlorn that milked",
-    "the man all tattered and torn that kissed",
-    "the priest all shaven and shorn that married",
-    "the rooster that crowed in the morn that woke",
-    "the farmer sowing his corn that kept",
-    "the horse and the hound and the horn that belonged to"
+    "house that Jack built",
+    "malt that lay in",
+    "rat that ate",
+    "cat that killed",
+    "dog that worried",
+    "cow with the crumpled horn that tossed",
+    "maiden all forlorn that milked",
+    "man all tattered and torn that kissed",
+    "priest all shaven and shorn that married",
+    "rooster that crowed in the morn that woke",
+    "farmer sowing his corn that kept",
+    "horse and the hound and the horn that belonged to"
 )
 
 Function Get-RhymeLine() {
@@ -19,11 +19,13 @@ Function Get-RhymeLine() {
         [string]$Line = ""
     )
 
+    $insert =  $Line + " the " + ($poem_blocks[$Verse - 1])
+
     if ($Verse -eq 1) {
-        return "This is $Line$($poem_blocks[$Verse - 1])."
+        return "This is${insert}."
     }
     else {
-        return (Get-RhymeLine -Verse ($Verse-1) -Line ($Line + ($poem_blocks[$Verse - 1]) + " "))
+        return (Get-RhymeLine -Verse ($Verse-1) -Line $insert)
     }
 }
 
