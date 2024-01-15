@@ -17,5 +17,16 @@ Function Invoke-MicroBlog() {
     Param(
         [string]$Post
     )
-    Throw "Please implement this function"
+
+    $textElements = [System.Globalization.StringInfo]::GetTextElementEnumerator($Post)
+
+    $result = ""
+    $count = 0
+
+    while ($textElements.MoveNext() -and $count -lt 5) {
+        $result += $textElements.Current
+        $count++
+    }
+
+    return $result
 }
