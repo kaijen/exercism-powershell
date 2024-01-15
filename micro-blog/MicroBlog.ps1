@@ -18,15 +18,6 @@ Function Invoke-MicroBlog() {
         [string]$Post
     )
 
-    $textElements = [System.Globalization.StringInfo]::GetTextElementEnumerator($Post)
-
-    $result = ""
-    $count = 0
-
-    while ($textElements.MoveNext() -and $count -lt 5) {
-        $result += $textElements.Current
-        $count++
-    }
-
-    return $result
+    # Found a much better solution than mine
+     -join ([System.Globalization.StringInfo]::GetTextElementEnumerator($Post) | Select-Object -First 5)
 }
