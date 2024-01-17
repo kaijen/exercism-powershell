@@ -17,5 +17,9 @@ Function Invoke-Etl() {
         [object]$Legacy
     )
 
-    Throw "Please implement this function"
+    $Legacy.Keys | % { $NewScores = @{} }{
+        $Legacy[$_] | % { $Score = $_ } {
+            $NewScores[$_] = $Score
+        }
+    } { $NewScores }
 }
