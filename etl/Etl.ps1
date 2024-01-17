@@ -19,7 +19,7 @@ Function Invoke-Etl() {
 
     $Legacy.Keys | % { $NewScores = @{} }{
         $Legacy[$_] | % { $Score = $_ } {
-            $NewScores[$_] = $Score
+            $NewScores[$_.ToLower()] = $Score
         }
     } { $NewScores }
 }
